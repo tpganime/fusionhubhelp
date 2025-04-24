@@ -1,20 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Fusion Hub Help Support</title>
 
-  <!-- Font Awesome for icons -->
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    integrity="sha512-p6O2W+GWT+IOJ1wtxmZQs54nUg9WNKcSeJnuXr4tE/zHzb6QzuCxvUJZXA1OSevGVYocTwtcqESq5at+7rG6EA=="
-    crossorigin="anonymous"
-    referrerpolicy="no-referrer"
-  />
-
   <style>
+    /* --- Reset & Base --- */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: Arial, sans-serif;
       color: #222;
@@ -26,6 +19,8 @@
       max-width: 360px;
       margin: auto;
     }
+
+    /* --- Logo --- */
     .logo {
       width: 140px;
       height: 140px;
@@ -41,17 +36,22 @@
       max-width: 100%;
       height: auto;
     }
+
+    /* --- Headline & Subtitle --- */
     h1 {
       font-size: 24px;
-      line-height: 1.3;
+      line-height: 1.2;
       text-transform: uppercase;
       margin-bottom: 16px;
     }
     .subtitle {
       font-size: 14px;
       color: #555;
-      margin-bottom: 20px;
+      margin-bottom: 24px;
+      line-height: 1.4;
     }
+
+    /* --- Social Icons Row --- */
     .social {
       display: flex;
       justify-content: center;
@@ -59,10 +59,9 @@
       margin-top: 16px;
     }
     .social a {
-      font-size: 24px;
-      color: #000;
+      width: 48px;
+      height: 48px;
       background: #f1f1f1;
-      padding: 10px;
       border-radius: 50%;
       display: inline-flex;
       align-items: center;
@@ -73,39 +72,62 @@
     .social a:hover {
       background: #ddd;
     }
+    .social svg {
+      width: 24px;
+      height: 24px;
+      fill: #222;
+    }
   </style>
 </head>
-
 <body>
   <div class="container">
     <!-- Logo -->
     <div class="logo">
-      <img src="fusiohub.jpg" alt="Fusion Hub Logo">
+      <img src="fusionhub.jpg" alt="Fusion Hub Logo" />
     </div>
 
     <!-- Headline -->
-    <h1>Fusion Hub<br>Help<br>Support</h1>
+    <h1>
+      Fusion Hub<br>
+      Help<br>
+      Support
+    </h1>
 
     <!-- Subtitle -->
-    <p class="subtitle">For any problem contact us or chat with our help bot</p>
+    <p class="subtitle">
+      For any problem contact us or chat with our help bot
+    </p>
 
-    <!-- Instagram and Email Buttons -->
+    <!-- Instagram and Gmail Buttons (inline SVG icons) -->
     <div class="social">
+      <!-- Instagram -->
       <a href="https://www.instagram.com/your_instagram" target="_blank" aria-label="Instagram">
-        <i class="fab fa-instagram"></i>
+        <svg viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg">
+          <!-- Instagram brand icon path -->
+          <path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9S160.5 370.8 224.1 370.8 339 319.5 339 255.9 287.7 141 224.1 141zm0 190.6c-41.8 0-75.7-33.9-75.7-75.7S182.3 180.2 224.1 180.2s75.7 33.9 75.7 75.7-33.9 75.7-75.7 75.7zm146.4-194.3c0 14.9-12.1 27-27 27h-27c-14.9 0-27-12.1-27-27v-27c0-14.9 12.1-27 27-27h27c14.9 0 27 12.1 27 27v27zM398.8 80c-6.9-16.3-19.8-29.1-36.1-36.1C336.6 37 224 37 224 37s-112.6 0-138.7 6.9c-16.3 6.9-29.1 19.8-36.1 36.1C37 104.6 37 217.2 37 217.2s0 112.6 6.9 138.7c6.9 16.3 19.8 29.1 36.1 36.1 26.1 6.9 138.7 6.9 138.7 6.9s112.6 0 138.7-6.9c16.3-6.9 29.1-19.8 36.1-36.1 6.9-26.1 6.9-138.7 6.9-138.7s0-112.6-6.9-138.7zM224.1 338c-45.4 0-82.1-36.7-82.1-82.1s36.7-82.1 82.1-82.1S306.2 210.5 306.2 255.9 269.5 338 224.1 338z"/>
+        </svg>
       </a>
-      <a href="mailto:fusionhub122@gmail.com" aria-label="Gmail">
-        <i class="fas fa-envelope"></i>
+
+      <!-- Email -->
+      <a href="mailto:fusionhub122@gmail.com" aria-label="Email">
+        <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+          <!-- Envelope icon path -->
+          <path d="M502.3 190.8L327.4 338.4c-9.2 7.4-21.6 11.6-33.4 11.6s-24.2-4.2-33.4-11.6L9.7 190.8c-5.3-4.3-9.7-10.6-9.7-17.8V96c0-26.5 21.5-48 48-48h416c26.5 0 48 21.5 48 48v77c0 7.2-4.4 13.5-9.7 17.8zM464 128H48c-8.8 0-16 7.2-16 16v45.8l192 154.4 192-154.4V144c0-8.8-7.2-16-16-16zM0 240v176c0 26.5 21.5 48 48 48h416c26.5 0 48-21.5 48-48V240l-214.6 172.6c-18.4 14.8-42.8 14.8-61.2 0L0 240z"/>
+        </svg>
       </a>
     </div>
   </div>
 
-  <!-- Chatbot Script -->
-  <script type="module">
-    import Chatbot from "https://cdn.jsdelivr.net/npm/@denserai/embed-chat@1/dist/web.min.js";
-    Chatbot.init({
-      chatbotId: "1e869621-66e3-493f-8e20-b61ebf2b2906",
-    });
+  <!-- Chatling Bot Embed -->
+  <script>
+    window.chtlConfig = { chatbotId: "2156756516" };
+  </script>
+  <script
+    async
+    data-id="2156756516"
+    id="chatling-embed-script"
+    type="text/javascript"
+    src="https://chatling.ai/js/embed.js">
   </script>
 </body>
 </html>
