@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fusion Hub Help Support</title>
+
+  <!-- Font Awesome for icons -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    integrity="sha512-p6O2W+GWT+IOJ1wtxmZQs54nUg9WNKcSeJnuXr4tE/zHzb6QzuCxvUJZXA1OSevGVYocTwtcqESq5at+7rG6EA=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      color: #222;
+      background: #fff;
+      text-align: center;
+      padding: 20px;
+    }
+    .container {
+      max-width: 360px;
+      margin: auto;
+    }
+    .logo {
+      width: 140px;
+      height: 140px;
+      margin: 0 auto 24px;
+      background: #000;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .logo img {
+      max-width: 100%;
+      height: auto;
+    }
+    h1 {
+      font-size: 24px;
+      line-height: 1.3;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .subtitle {
+      font-size: 14px;
+      color: #555;
+      margin-bottom: 20px;
+    }
+    .social {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 16px;
+    }
+    .social a {
+      font-size: 24px;
+      color: #000;
+      background: #f1f1f1;
+      padding: 10px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .social a:hover {
+      background: #ddd;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <!-- Logo -->
+    <div class="logo">
+      <img src="fusiohub.jpg" alt="Fusion Hub Logo">
+    </div>
+
+    <!-- Headline -->
+    <h1>Fusion Hub<br>Help<br>Support</h1>
+
+    <!-- Subtitle -->
+    <p class="subtitle">For any problem contact us or chat with our help bot</p>
+
+    <!-- Instagram and Email Buttons -->
+    <div class="social">
+      <a href="https://www.instagram.com/your_instagram" target="_blank" aria-label="Instagram">
+        <i class="fab fa-instagram"></i>
+      </a>
+      <a href="mailto:fusionhub122@gmail.com" aria-label="Gmail">
+        <i class="fas fa-envelope"></i>
+      </a>
+    </div>
+  </div>
+
+  <!-- Chatbot Script -->
+  <script type="module">
+    import Chatbot from "https://cdn.jsdelivr.net/npm/@denserai/embed-chat@1/dist/web.min.js";
+    Chatbot.init({
+      chatbotId: "1e869621-66e3-493f-8e20-b61ebf2b2906",
+    });
+  </script>
+</body>
+</html>
