@@ -1,213 +1,62 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Fusion Hub – Home with FusionBot</title>
   <style>
-    :root {
-      --bg-start: #aeecdb;
-      --bg-end:   #d0f5ea;
-      --item-bg:  rgba(255,255,255,0.95);
-      --shadow:   rgba(0,0,0,0.15);
-      --hover:    rgba(0,0,0,0.25);
-    }
-    * { box-sizing: border-box }
+    :root { --bg-start:#aeecdb; --bg-end:#d0f5ea; --item-bg:rgba(255,255,255,0.95); --shadow:rgba(0,0,0,0.15); --hover:rgba(0,0,0,0.25); }
+    * { box-sizing:border-box }
     html, body { margin:0; padding:0; height:100% }
-    body {
-      font-family: Roboto, sans-serif;
-      background: linear-gradient(135deg, var(--bg-start), var(--bg-end));
-      overflow-x: hidden;
-    }
+    body { font-family:Roboto, sans-serif; background:linear-gradient(135deg,var(--bg-start),var(--bg-end)); overflow-x:hidden }
     .container { padding:2rem; text-align:center }
-    .app-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(140px,1fr));
-      gap: 18px;
-      max-width: 800px;
-      margin: 0 auto;
-      perspective: 800px;
-    }
-    .app-item {
-      background: var(--item-bg);
-      border-radius: 10px;
-      padding: 15px;
-      text-align: center;
-      box-shadow: 0 3px 8px var(--shadow);
-      cursor: pointer;
-      transition: transform 0.35s, box-shadow 0.35s;
-      animation: float 8s ease-in-out infinite;
-    }
-    .app-item:hover {
-      transform: translateZ(12px) rotateX(3deg) rotateY(3deg) scale(1.02);
-      box-shadow: 0 6px 16px var(--hover);
-    }
-    @keyframes float {
-      0%,100% { transform: translateY(0) }
-      50%     { transform: translateY(-6px) }
-    }
+    .app-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:18px; max-width:800px; margin:0 auto; perspective:800px }
+    .app-item { background:var(--item-bg); border-radius:10px; padding:15px; text-align:center; box-shadow:0 3px 8px var(--shadow); cursor:pointer; transition:transform .35s,box-shadow .35s; animation:float 8s ease-in-out infinite }
+    .app-item:hover { transform:translateZ(12px) rotateX(3deg) rotateY(3deg) scale(1.02); box-shadow:0 6px 16px var(--hover) }
+    @keyframes float {0%,100%{transform:translateY(0);}50%{transform:translateY(-6px);} }
     .app-item img { width:55px; height:55px; margin-bottom:8px }
     .app-item span { font-weight:700 }
-
     /* FusionBot */
-    #fusionBot {
-      position: fixed;
-      bottom: 100px; right: 20px;
-      width: 100px; height: 100px;
-      background: #ffffffcc;
-      border-radius: 50%;
-      box-shadow: 0 3px 8px rgba(0,0,0,0.3);
-      display: flex; align-items: center; justify-content: center;
-      opacity: 0; pointer-events:none;
-      transform: translateY(20px);
-      transition: opacity 0.3s, transform 0.3s;
-    }
-    #fusionBot.active {
-      opacity: 1; transform: translateY(0);
-    }
+    #fusionBot { position:fixed; bottom:100px; right:20px; width:100px; height:100px; background:#ffffffcc; border-radius:50%; box-shadow:0 3px 8px rgba(0,0,0,0.3); display:flex; align-items:center; justify-content:center; opacity:0; pointer-events:none; transform:translateY(20px); transition:opacity .3s,transform .3s }
+    #fusionBot.active { opacity:1; transform:translateY(0) }
     #fusionBot img { width:80px; height:80px }
-
     /* Speech bubble */
-    #speechBubble {
-      position: fixed;
-      bottom: 210px; right: 130px;
-      max-width: 200px;
-      padding: 10px;
-      background: #fff;
-      border-radius: 10px;
-      box-shadow: 0 3px 8px rgba(0,0,0,0.2);
-      font-size: 14px;
-      opacity: 0;
-      transition: opacity 0.3s;
-    }
-    #speechBubble.active { opacity: 1 }
-
-    /* Mic button (always on) */
-    #micButton {
-      position: fixed;
-      bottom: 80px;
-      right: 20px;
-      background: #00796b;
-      color: #fff;
-      border: none;
-      padding: 15px;
-      border-radius: 50%;
-      font-size: 20px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-      cursor: default;
-      z-index: 1000;
-    }
+    #speechBubble { position:fixed; bottom:210px; right:130px; max-width:200px; padding:10px; background:#fff; border-radius:10px; box-shadow:0 3px 8px rgba(0,0,0,0.2); font-size:14px; opacity:0; transition:opacity .3s }
+    #speechBubble.active { opacity:1 }
+    /* Mic button */
+    #micButton { position:fixed; bottom:80px; right:20px; background:#00796b; color:#fff; border:none; padding:15px; border-radius:50%; font-size:20px; box-shadow:0 4px 8px rgba(0,0,0,0.3); cursor:pointer; z-index:1000 }
+    #micButton.disabled { background:#555; cursor:not-allowed }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Welcome to Fusion Hub!</h1>
-    <p>Say “FusionHub” or “Hey TPG” to wake FusionBot!</p>
-    <div class="app-grid">
-      <div class="app-item" onclick="openLink('https://chat.openai.com/')">
-        <img src="gpt.png" alt="ChatGPT"><span>ChatGPT</span>
-      </div>
-      <div class="app-item" onclick="openLink('https://m.soundcloud.com/')">
-        <img src="music.png" alt="Music"><span>Music</span>
-      </div>
-      <div class="app-item" onclick="openLink('https://www.crazygames.com/')">
-        <img src="games.jpg" alt="Games"><span>Game Server 1</span>
-      </div>
-      <div class="app-item" onclick="openLink('https://poki.com/')">
-        <img src="games.jpg" alt="Games"><span>Game Server 2</span>
-      </div>
-      <div class="app-item" onclick="openLink('https://9anime.org.lv/')">
-        <img src="Anime.jpg" alt="Anime"><span>Anime</span>
-      </div>
-    </div>
+<div class="container">
+  <h1>Welcome to Fusion Hub!</h1>
+  <p>Click 🎤 to enable voice, then say “FusionHub” or “Hey TPG”!</p>
+  <div class="app-grid">
+    <div class="app-item" onclick="openLink('https://chat.openai.com/')"><img src="gpt.png" alt="ChatGPT"><span>ChatGPT</span></div>
+    <div class="app-item" onclick="openLink('https://m.soundcloud.com/')"><img src="music.png" alt="Music"><span>Music</span></div>
+    <div class="app-item" onclick="openLink('https://www.crazygames.com/')"><img src="games.jpg" alt="Game Server 1"><span>Game Server 1</span></div>
+    <div class="app-item" onclick="openLink('https://poki.com/')"><img src="games.jpg" alt="Game Server 2"><span>Game Server 2</span></div>
+    <div class="app-item" onclick="openLink('https://9anime.org.lv/')"><img src="Anime.jpg" alt="Anime"><span>Anime</span></div>
   </div>
+</div>
+<button id="micButton">🎤</button>
+<div id="fusionBot"><img src="fusionbot.png" alt="FusionBot"></div>
+<div id="speechBubble"></div>
+<script>
+  function openLink(url){ location.href = url; }
+  const micBtn = document.getElementById('micButton');
+  const bot = document.getElementById('fusionBot');
+  const bubble = document.getElementById('speechBubble');// SpeechRecognition setup const SR = window.SpeechRecognition||window.webkitSpeechRecognition; const rec = new SR(); rec.continuous = true; rec.interimResults = false; rec.lang = 'en-US';
 
-  <button id="micButton">🎤</button>
-  <div id="fusionBot"><img src="fusionbot.png" alt="FusionBot"></div>
-  <div id="speechBubble"></div>
+let activated=false; let micAllowed=false; let lastTime=Date.now(); const SILENCE=30601000; let voices=[]; speechSynthesis.onvoiceschanged = ()=>voices=speechSynthesis.getVoices().filter(v=>v.lang.startsWith('en')); voices=speechSynthesis.getVoices().filter(v=>v.lang.startsWith('en'));
 
-  <script>
-    function openLink(url){ window.location.href = url; }
+function speak(txt){ const msg=new SpeechSynthesisUtterance(txt); msg.voice=voices.find(v=>/female/i.test(v.name))||voices[0]; msg.lang='en-US'; speechSynthesis.speak(msg); bubble.textContent=txt; bubble.classList.add('active'); clearTimeout(bubble._t); bubble._t=setTimeout(()=>bubble.classList.remove('active'),3000); lastTime=Date.now(); }
 
-    // Speech setup
-    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-    const recognition = new SpeechRecognition();
-    recognition.continuous = true;
-    recognition.interimResults = false;
-    recognition.lang = 'en-US';
+// On mic button click: ask permission, then start recognition micBtn.onclick = ()=>{ if(!micAllowed){ micBtn.disabled=true; navigator.mediaDevices.getUserMedia({audio:true}) .then(stream=>{ stream.getTracks().forEach(t=>t.stop()); micAllowed=true; micBtn.classList.remove('disabled'); rec.start(); }).catch(err=>{ alert('Mic access denied'); console.error(err); }); } };
 
-    // State variables
-    let activated = false;
-    let lastSpoke = Date.now();
-    const SILENCE_TIMEOUT = 30*60*1000; // 30 minutes
-    let voices = [];
+rec.onresult = ev=>{ const txt=ev.results[ev.results.length-1][0].transcript.toLowerCase().trim(); console.log('Heard:',txt); lastTime=Date.now(); if(!activated){ if(txt.includes('fusionhub')||txt.includes('hey tpg')){ activated=true; bot.classList.add('active'); speak('Yes? How can I help?'); } return; } // commands if(txt.includes('open music')){speak('Opening music');openLink('https://m.soundcloud.com/')} else if(txt.includes('open game server 1')){speak('Opening server 1');openLink('https://www.crazygames.com/')} else if(txt.includes('open game server 2')){speak('Opening server 2');openLink('https://poki.com/')} else if(txt.includes('open anime')){speak('Opening anime');openLink('https://9anime.org.lv/')} else if(txt.includes('open chatgpt')){speak('Opening ChatGPT');openLink('https://chat.openai.com/')} else if(txt.includes('hello')){speak('Hello there!')} else if(txt.includes('how are you')){speak('I am fine, thank you!')} else if(txt.includes('bye')){speak('Goodbye!');activated=false;bot.classList.remove('active')} };
 
-    // Load voices
-    speechSynthesis.onvoiceschanged = () => {
-      voices = speechSynthesis.getVoices().filter(v=>v.lang.startsWith('en'));
-    };
-    voices = speechSynthesis.getVoices().filter(v=>v.lang.startsWith('en'));
+rec.onend=()=>{ const now=Date.now(), diff=now-lastTime; const delay=diff> SILENCE?SILENCE:500; setTimeout(()=>rec.start(),delay); // keep alive (developer.mozilla.org, developer.mozilla.org) }; rec.onerror=()=>setTimeout(()=>rec.start(),500); </script>
 
-    function speak(text) {
-      const msg = new SpeechSynthesisUtterance(text);
-      msg.voice = voices.find(v=>/female/i.test(v.name)) || voices[0];
-      msg.lang = 'en-US';
-      speechSynthesis.speak(msg);
-      showBubble(text);
-      lastSpoke = Date.now();
-    }
-
-    const micBtn = document.getElementById('micButton'),
-          bot    = document.getElementById('fusionBot'),
-          bubble = document.getElementById('speechBubble');
-
-    function showBubble(txt) {
-      bubble.textContent = txt;
-      bubble.classList.add('active');
-      clearTimeout(bubble._t);
-      bubble._t = setTimeout(()=> bubble.classList.remove('active'), 3000);
-    }
-
-    // On speech result
-    recognition.onresult = (e) => {
-      const text = e.results[e.results.length-1][0].transcript.toLowerCase().trim();
-      console.log('Heard:', text);
-      lastSpoke = Date.now();
-
-      if (!activated) {
-        if (text.includes('fusionhub') || text.includes('hey tpg')) {
-          activated = true;
-          bot.classList.add('active');
-          speak('Yes? How can I help?');
-        }
-        return;
-      }
-
-      // Post-wake commands
-      if (text.includes('open music'))           { speak('Opening music'); openLink('https://m.soundcloud.com/'); }
-      else if (text.includes('open game server 1')) { speak('Opening game server one'); openLink('https://www.crazygames.com/'); }
-      else if (text.includes('open game server 2')) { speak('Opening game server two'); openLink('https://poki.com/'); }
-      else if (text.includes('open anime'))       { speak('Opening anime'); openLink('https://9anime.org.lv/'); }
-      else if (text.includes('open chatgpt'))     { speak('Opening ChatGPT'); openLink('https://chat.openai.com/'); }
-      else if (text.includes('hello'))            { speak('Hello there!'); }
-      else if (text.includes('how are you'))      { speak('I am fine, thank you!'); }
-      else if (text.includes('tell me a joke'))   { speak('Why did the web developer leave the restaurant? Because of the table layout!'); }
-      else if (text.includes('bye'))              { speak('Goodbye!'); activated=false; bot.classList.remove('active'); }
-    };
-
-    // Restart logic with 30-min delay if long silence
-    recognition.onend = () => {
-      const now = Date.now();
-      const since = now - lastSpoke;
-      const delay = since > SILENCE_TIMEOUT ? SILENCE_TIMEOUT : 500;
-      setTimeout(() => recognition.start(), delay);
-    };
-    recognition.onerror = () => {
-      setTimeout(() => recognition.start(), 500);
-    };
-
-    // Start always-on
-    recognition.start();
-  </script>
 </body>
-</html>hai 
+</html>
