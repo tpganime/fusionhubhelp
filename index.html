@@ -1,62 +1,133 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Fusion Hub – Home with FusionBot</title>
+  <title>Fusion Hub Help Support</title>
+
   <style>
-    :root { --bg-start:#aeecdb; --bg-end:#d0f5ea; --item-bg:rgba(255,255,255,0.95); --shadow:rgba(0,0,0,0.15); --hover:rgba(0,0,0,0.25); }
-    * { box-sizing:border-box }
-    html, body { margin:0; padding:0; height:100% }
-    body { font-family:Roboto, sans-serif; background:linear-gradient(135deg,var(--bg-start),var(--bg-end)); overflow-x:hidden }
-    .container { padding:2rem; text-align:center }
-    .app-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:18px; max-width:800px; margin:0 auto; perspective:800px }
-    .app-item { background:var(--item-bg); border-radius:10px; padding:15px; text-align:center; box-shadow:0 3px 8px var(--shadow); cursor:pointer; transition:transform .35s,box-shadow .35s; animation:float 8s ease-in-out infinite }
-    .app-item:hover { transform:translateZ(12px) rotateX(3deg) rotateY(3deg) scale(1.02); box-shadow:0 6px 16px var(--hover) }
-    @keyframes float {0%,100%{transform:translateY(0);}50%{transform:translateY(-6px);} }
-    .app-item img { width:55px; height:55px; margin-bottom:8px }
-    .app-item span { font-weight:700 }
-    /* FusionBot */
-    #fusionBot { position:fixed; bottom:100px; right:20px; width:100px; height:100px; background:#ffffffcc; border-radius:50%; box-shadow:0 3px 8px rgba(0,0,0,0.3); display:flex; align-items:center; justify-content:center; opacity:0; pointer-events:none; transform:translateY(20px); transition:opacity .3s,transform .3s }
-    #fusionBot.active { opacity:1; transform:translateY(0) }
-    #fusionBot img { width:80px; height:80px }
-    /* Speech bubble */
-    #speechBubble { position:fixed; bottom:210px; right:130px; max-width:200px; padding:10px; background:#fff; border-radius:10px; box-shadow:0 3px 8px rgba(0,0,0,0.2); font-size:14px; opacity:0; transition:opacity .3s }
-    #speechBubble.active { opacity:1 }
-    /* Mic button */
-    #micButton { position:fixed; bottom:80px; right:20px; background:#00796b; color:#fff; border:none; padding:15px; border-radius:50%; font-size:20px; box-shadow:0 4px 8px rgba(0,0,0,0.3); cursor:pointer; z-index:1000 }
-    #micButton.disabled { background:#555; cursor:not-allowed }
+    /* --- Reset & Base --- */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: Arial, sans-serif;
+      color: #222;
+      background: #fff;
+      text-align: center;
+      padding: 20px;
+    }
+    .container {
+      max-width: 360px;
+      margin: auto;
+    }
+
+    /* --- Logo --- */
+    .logo {
+      width: 140px;
+      height: 140px;
+      margin: 0 auto 24px;
+      background: #000;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .logo img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    /* --- Headline & Subtitle --- */
+    h1 {
+      font-size: 24px;
+      line-height: 1.2;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .subtitle {
+      font-size: 14px;
+      color: #555;
+      margin-bottom: 24px;
+      line-height: 1.4;
+    }
+
+    /* --- Social Icons Row --- */
+    .social {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 16px;
+    }
+    .social a {
+      width: 48px;
+      height: 48px;
+      background: #f1f1f1;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .social a:hover {
+      background: #ddd;
+    }
+    .social svg {
+      width: 24px;
+      height: 24px;
+      fill: #222;
+    }
   </style>
 </head>
 <body>
-<div class="container">
-  <h1>Welcome to Fusion Hub!</h1>
-  <p>Click 🎤 to enable voice, then say “FusionHub” or “Hey TPG”!</p>
-  <div class="app-grid">
-    <div class="app-item" onclick="openLink('https://chat.openai.com/')"><img src="gpt.png" alt="ChatGPT"><span>ChatGPT</span></div>
-    <div class="app-item" onclick="openLink('https://m.soundcloud.com/')"><img src="music.png" alt="Music"><span>Music</span></div>
-    <div class="app-item" onclick="openLink('https://www.crazygames.com/')"><img src="games.jpg" alt="Game Server 1"><span>Game Server 1</span></div>
-    <div class="app-item" onclick="openLink('https://poki.com/')"><img src="games.jpg" alt="Game Server 2"><span>Game Server 2</span></div>
-    <div class="app-item" onclick="openLink('https://9anime.org.lv/')"><img src="Anime.jpg" alt="Anime"><span>Anime</span></div>
+  <div class="container">
+    <!-- Logo -->
+    <div class="logo">
+      <img src="fusionhub.jpg" alt="Fusion Hub Logo" />
+    </div>
+
+    <!-- Headline -->
+    <h1>
+      Fusion Hub<br>
+      Help<br>
+      Support
+    </h1>
+
+    <!-- Subtitle -->
+    <p class="subtitle">
+      For any problem contact us or chat with our help bot
+    </p>
+
+    <!-- Instagram and Gmail Buttons (inline SVG icons) -->
+    <div class="social">
+      <!-- Instagram -->
+      <a href="https://www.instagram.com/help.fusionhub?igsh=b3U4d3poYnUwcGk4" target="_blank" aria-label="Instagram">
+        <svg viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg">
+          <!-- Instagram brand icon path -->
+          <path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9S160.5 370.8 224.1 370.8 339 319.5 339 255.9 287.7 141 224.1 141zm0 190.6c-41.8 0-75.7-33.9-75.7-75.7S182.3 180.2 224.1 180.2s75.7 33.9 75.7 75.7-33.9 75.7-75.7 75.7zm146.4-194.3c0 14.9-12.1 27-27 27h-27c-14.9 0-27-12.1-27-27v-27c0-14.9 12.1-27 27-27h27c14.9 0 27 12.1 27 27v27zM398.8 80c-6.9-16.3-19.8-29.1-36.1-36.1C336.6 37 224 37 224 37s-112.6 0-138.7 6.9c-16.3 6.9-29.1 19.8-36.1 36.1C37 104.6 37 217.2 37 217.2s0 112.6 6.9 138.7c6.9 16.3 19.8 29.1 36.1 36.1 26.1 6.9 138.7 6.9 138.7 6.9s112.6 0 138.7-6.9c16.3-6.9 29.1-19.8 36.1-36.1 6.9-26.1 6.9-138.7 6.9-138.7s0-112.6-6.9-138.7zM224.1 338c-45.4 0-82.1-36.7-82.1-82.1s36.7-82.1 82.1-82.1S306.2 210.5 306.2 255.9 269.5 338 224.1 338z"/>
+        </svg>
+      </a>
+
+      <!-- Email -->
+      <a href="mailto:fusionhub122@gmail.com" aria-label="Email">
+        <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+          <!-- Envelope icon path -->
+          <path d="M502.3 190.8L327.4 338.4c-9.2 7.4-21.6 11.6-33.4 11.6s-24.2-4.2-33.4-11.6L9.7 190.8c-5.3-4.3-9.7-10.6-9.7-17.8V96c0-26.5 21.5-48 48-48h416c26.5 0 48 21.5 48 48v77c0 7.2-4.4 13.5-9.7 17.8zM464 128H48c-8.8 0-16 7.2-16 16v45.8l192 154.4 192-154.4V144c0-8.8-7.2-16-16-16zM0 240v176c0 26.5 21.5 48 48 48h416c26.5 0 48-21.5 48-48V240l-214.6 172.6c-18.4 14.8-42.8 14.8-61.2 0L0 240z"/>
+        </svg>
+      </a>
+    </div>
   </div>
-</div>
-<button id="micButton">🎤</button>
-<div id="fusionBot"><img src="fusionbot.png" alt="FusionBot"></div>
-<div id="speechBubble"></div>
-<script>
-  function openLink(url){ location.href = url; }
-  const micBtn = document.getElementById('micButton');
-  const bot = document.getElementById('fusionBot');
-  const bubble = document.getElementById('speechBubble');// SpeechRecognition setup const SR = window.SpeechRecognition||window.webkitSpeechRecognition; const rec = new SR(); rec.continuous = true; rec.interimResults = false; rec.lang = 'en-US';
 
-let activated=false; let micAllowed=false; let lastTime=Date.now(); const SILENCE=30601000; let voices=[]; speechSynthesis.onvoiceschanged = ()=>voices=speechSynthesis.getVoices().filter(v=>v.lang.startsWith('en')); voices=speechSynthesis.getVoices().filter(v=>v.lang.startsWith('en'));
-
-function speak(txt){ const msg=new SpeechSynthesisUtterance(txt); msg.voice=voices.find(v=>/female/i.test(v.name))||voices[0]; msg.lang='en-US'; speechSynthesis.speak(msg); bubble.textContent=txt; bubble.classList.add('active'); clearTimeout(bubble._t); bubble._t=setTimeout(()=>bubble.classList.remove('active'),3000); lastTime=Date.now(); }
-
-// On mic button click: ask permission, then start recognition micBtn.onclick = ()=>{ if(!micAllowed){ micBtn.disabled=true; navigator.mediaDevices.getUserMedia({audio:true}) .then(stream=>{ stream.getTracks().forEach(t=>t.stop()); micAllowed=true; micBtn.classList.remove('disabled'); rec.start(); }).catch(err=>{ alert('Mic access denied'); console.error(err); }); } };
-
-rec.onresult = ev=>{ const txt=ev.results[ev.results.length-1][0].transcript.toLowerCase().trim(); console.log('Heard:',txt); lastTime=Date.now(); if(!activated){ if(txt.includes('fusionhub')||txt.includes('hey tpg')){ activated=true; bot.classList.add('active'); speak('Yes? How can I help?'); } return; } // commands if(txt.includes('open music')){speak('Opening music');openLink('https://m.soundcloud.com/')} else if(txt.includes('open game server 1')){speak('Opening server 1');openLink('https://www.crazygames.com/')} else if(txt.includes('open game server 2')){speak('Opening server 2');openLink('https://poki.com/')} else if(txt.includes('open anime')){speak('Opening anime');openLink('https://9anime.org.lv/')} else if(txt.includes('open chatgpt')){speak('Opening ChatGPT');openLink('https://chat.openai.com/')} else if(txt.includes('hello')){speak('Hello there!')} else if(txt.includes('how are you')){speak('I am fine, thank you!')} else if(txt.includes('bye')){speak('Goodbye!');activated=false;bot.classList.remove('active')} };
-
-rec.onend=()=>{ const now=Date.now(), diff=now-lastTime; const delay=diff> SILENCE?SILENCE:500; setTimeout(()=>rec.start(),delay); // keep alive (developer.mozilla.org, developer.mozilla.org) }; rec.onerror=()=>setTimeout(()=>rec.start(),500); </script>
-
+  <!-- Chatling Bot Embed -->
+  <script>
+    window.chtlConfig = { chatbotId: "2156756516" };
+  </script>
+  <script
+    async
+    data-id="2156756516"
+    id="chatling-embed-script"
+    type="text/javascript"
+    src="https://chatling.ai/js/embed.js">
+  </script>
 </body>
 </html>
